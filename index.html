@@ -8,10 +8,23 @@
     <title>Tetris</title>
 </head>
 <body>
-    <h1>Tetris</h1>
     
-    <canvas id="canvas" width="480" height="480"></canvas>  
-    <button id="btn">Play</button>
+    <div id="game">
+        <h1>Tetris</h1>
+
+        <div id="game-div">
+            <div id="intro-hover">
+                <button id="btn">Play</button>
+            </div>
+
+            <div id="game-over">
+                <div class="end">Game Over!</div>
+                <button id="new-game-btn">Try Again!</button>
+            </div>
+            
+            <canvas id="canvas" width="480" height="480"></canvas>    
+        </div>
+    </div>
     
     <script src="script.js"></script>
 </body>

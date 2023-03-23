@@ -1,4 +1,6 @@
 const btn = document.getElementById("btn");
+const introDiv = document.getElementById("intro-hover");
+const gameOverDiv = document.getElementById("game-over");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
@@ -68,10 +70,10 @@ const pieces = [
 const options = {
     width: 13,
     height: 13,
+    dropInterval: 500,
     x: 5,
     y: -3,
     canMoveDown: true,
-    dropInterval: 500
 };
 options.sizeX = canvas.width / options.width;
 options.sizeY = canvas.height / options.height;
@@ -248,6 +250,17 @@ function gameOver() {
     return false;
 }
 
+function newGame() {
+    const newGameBtn = document.getElementById("new-game-btn");
+
+    newGameBtn.addEventListener("click", () => {
+        gameOverDiv.classList.remove("active");
+        currentPiece;
+        board = Array(options.width + 1).fill([]).map(() => Array(options.height).fill(0));
+        getNextPiece();
+    });
+}
+
 function update() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -256,7 +269,10 @@ function update() {
     }
 
     if (gameOver()) {
-        alert("Game Over!");
+        gameOverDiv.classList.add("active");
+        options.canMoveDown = false;
+
+        newGame();
     }
 }
 
@@ -283,6 +299,7 @@ function loop() {
 
 // user actions
 btn.addEventListener("click", () => {
+    introDiv.classList.add("cliked");
     getNextPiece();
     loop();
 });
